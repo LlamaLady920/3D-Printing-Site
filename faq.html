@@ -1,0 +1,363 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - 3D Printing Hub</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: #e6e6e6;
+    background-color: #2b2f3a;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* GRID */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+
+    background-size: 30px 30px;
+    animation: gridMove 25s linear infinite;
+
+    pointer-events: none;
+}
+
+/* FADE EDGES */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+
+    background: radial-gradient(
+        circle at center,
+        rgba(43, 47, 58, 0) 40%,
+        rgba(43, 47, 58, 0.75) 75%,
+        rgba(43, 47, 58, 1) 100%
+    );
+
+    pointer-events: none;
+}
+
+@keyframes gridMove {
+    from { transform: translate(0,0); }
+    to { transform: translate(30px,30px); }
+}
+
+header {
+    background-color: #222733;
+    padding: 50px 20px;
+    text-align: center;
+    border-bottom: 2px solid #6c8f7f;
+}
+
+header h1 {
+    font-size: 2.6em;
+    margin: 0;
+}
+
+header p {
+    color: #b8c0cc;
+    margin-top: 10px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.intro,
+.faq-item {
+    background: rgba(37, 43, 56, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+
+    padding: 20px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+    position: relative;
+    z-index: 2;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.intro:hover,
+.faq-item:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.35),
+        0 0 20px rgba(108,143,127,0.15);
+}
+
+a.button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 18px;
+    background-color: #6c8f7f;
+    color: #10131a;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+a.button:hover {
+    background-color: #86a89a;
+}
+
+nav {
+    background-color: #252b38;
+    padding: 12px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+
+nav a {
+    color: #b8c0cc;
+    margin: 0 12px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: #ffffff;
+}
+
+/* FAQ */
+
+.faq-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.faq-question {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #e6e6e6;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.faq-answer {
+    margin-top: 15px;
+    color: #b8c0cc;
+    line-height: 1.7;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #222733;
+    margin-top: 40px;
+    color: #9fb3aa;
+}
+footer a {
+    color: #6c8f7f;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+footer a:hover {
+    color: #86a89a;
+}
+
+.trail-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(108,143,127,0.6);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    animation: fadeOut 0.6s linear forwards;
+}
+
+.trail {
+    position: fixed;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(108,143,127,0.35);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    transition: transform 0.08s linear;
+}
+
+.trail-2 {
+    width: 10px;
+    height: 10px;
+    background: rgba(160, 200, 180, 0.25);
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+}
+
+.magnetic {
+    transition: transform 0.15s ease;
+    will-change: transform;
+}
+</style>
+</head>
+
+<body>
+<div class="cursor-glow"></div>
+<div class="trail"></div>
+<div class="trail trail-2"></div>
+
+<header>
+    <h1>FAQ</h1>
+    <p>Frequently Asked Questions About 3D Printing</p>
+
+<nav style="text-align:center; padding:15px;">
+    <a class="button" href="index.html">Home</a>
+    <a class="button" href="guide.html">Guide</a>
+    <a class="button" href="types.html">Types</a>
+    <a class="button" href="materials.html">Materials</a>
+    <a class="button" href="process.html">Process</a>
+    <a class="button" href="tips.html">Tips</a>
+    <a class="button" href="contact.html">Contact</a>
+    <a class="button" href="faq.html">FAQ</a>
+</nav>
+
+</header>
+
+<div class="container">
+
+    <div class="intro">
+        <h2>Common Questions</h2>
+
+        <p>
+            New to 3D printing? Here are answers to some of the
+            most commonly asked questions.
+        </p>
+    </div>
+
+    <div class="faq-container">
+
+        <div class="faq-item">
+            <h3>What is 3D printing?</h3>
+
+            <div class="faq-answer">
+                3D printing is a process that creates physical objects
+                layer by layer using a digital design.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <h3>What material should beginners use?</h3>
+
+            <div class="faq-answer">
+                PLA filament is usually best for beginners because it
+                is easy to print and affordable.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <h3>How expensive are 3D printers?</h3>
+
+            <div class="faq-answer">
+                Beginner printers can start around £150-£300,
+                while advanced professional printers cost much more.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <h3>How long does a print take?</h3>
+
+            <div class="faq-answer">
+                Small models may take under an hour, while larger
+                prints can take several hours or longer.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can I design my own models?</h3>
+
+            <div class="faq-answer">
+                Yes. Software such as Tinkercad, Fusion 360,
+                and Blender can be used to create custom models.
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+  <p>Contact us: info@yourdomain.com | Phone: +44 1234 567890</p>
+
+  <p>
+    Follow me for different content:
+    <a href="https://www.youtube.com/@llamamae4170" target="_blank">YouTube</a> |
+    <a href="https://www.twitch.tv/llamalady920" target="_blank">Twitch</a>
+  </p>
+
+  <p>&copy; 2026 Your 3D Printing Site</p>
+</footer>
+
+<script>
+    const trail = document.querySelector('.trail');
+    const trail2 = document.querySelector('.trail-2');
+
+    let mouseX = 0, mouseY = 0;
+    let tX = 0, tY = 0;
+    let t2X = 0, t2Y = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animate() {
+        tX += (mouseX - tX) * 0.15;
+        tY += (mouseY - tY) * 0.15;
+
+        t2X += (mouseX - t2X) * 0.08;
+        t2Y += (mouseY - t2Y) * 0.08;
+
+        trail.style.left = tX + 'px';
+        trail.style.top = tY + 'px';
+
+        trail2.style.left = t2X + 'px';
+        trail2.style.top = t2Y + 'px';
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+</script>
+</body>
+</html>
